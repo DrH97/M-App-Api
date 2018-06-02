@@ -15,7 +15,15 @@ class CreatePlaceActivitiesTable extends Migration
     {
         Schema::create('place_activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('place_id')->unsigned();
+            $table->integer('activity_id')->unsigned();
+            $table->float('price');
+            $table->float('offer')->nullable();
+            $table->string('type')->nullable();
+            $table->date('date_from')->nullable();
+            $table->date('date_to')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

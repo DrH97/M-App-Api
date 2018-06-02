@@ -18,8 +18,30 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('v1')->group(function() {
+Route::namespace('Api\V1')->prefix('v1')->group(function() {
     Route::get('/users', function() {
         return view('welcome');
-    });   
+    });
+
+    Route::prefix('places')->group(function() {
+        Route::get('/', 'PlaceController@index');
+        Route::get('/{id}', 'PlaceController@show');
+        Route::get('/{id}/activities', 'PlaceController@indexPlaceActivities');
+        Route::get('/{place_id}/activities/{id}', 'PlaceController@showPlaceActivity');
+    });
+
+    Route::prefix('activities')->group(function() {
+        Route::get('/', 'ActivityController@index');
+        Route::get('/{id}', 'ActivityController@show');
+        Route::get('/{id}/places', 'ActivityController@indexActivityPlaces');
+        Route::get('/{activity_id}/places/{id}', 'ActivityController@showActivityPlace');
+    });
+
+    Route::prefix('locations')->group(function() {
+        Route::get('/', 'LocationController@index');
+        Route::get('/{id}', 'LocationController@show');
+        Route::get('/{id}/places', 'LocationController@indexLocationPlaces');
+        Route::get('/{location_id}/places/{id}', 'LocationController@showLocationPlace');
+    });
+    
 });

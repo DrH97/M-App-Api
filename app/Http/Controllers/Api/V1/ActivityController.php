@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Activity;
+use App\PlaceActivity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,50 +17,81 @@ class ActivityController extends Controller
     public function index()
     {
         //
+        return Activity::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show($activity)
     {
         //
+        return Activity::find($activity);
+    }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Activity  $activity
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, Activity $activity)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Activity  $activity
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(Activity $activity)
+    // {
+    //     //
+    // }
+
+    /**
+     * Display a listing of places of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexActivityPlaces($id)
+    {
+        //
+        $activity = Activity::find($id);
+
+        return $activity->placeActivities;
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the specified place of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Activity $activity)
+    public function showActivityPlace($activity_id, $id)
     {
         //
+        // $activity = PlaceActivity::where('activity_id', $activity_id)->where('place_id', $id)->get();
+        // // $activity = $activity->where('place_id', $id)->get();
+
+        $activity = Activity::find($activity_id)->placeActivities->where('place_id', $id);
+
+        return $activity == null ? [] : $activity;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Activity $activity)
-    {
-        //
-    }
 }
