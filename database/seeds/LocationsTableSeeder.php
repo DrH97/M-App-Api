@@ -14,7 +14,7 @@ class LocationsTableSeeder extends Seeder
         //
         factory(App\Location::class, 5)->create()
             ->each(function ($l) {
-                $l->place()->save(factory(App\Place::class)->make());
+                $l->places()->save(factory(App\Place::class)->make());
         });            
     }
 }

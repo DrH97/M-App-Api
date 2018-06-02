@@ -13,15 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/v1/user', function (Request $request) {
     return $request->user();
 });
 
 
 Route::namespace('Api\V1')->prefix('v1')->group(function() {
-    Route::get('/users', function() {
-        return view('welcome');
-    });
+    // Route::get('/users', function() {
+    //     return view('welcome');
+    // });
 
     Route::prefix('places')->group(function() {
         Route::get('/', 'PlaceController@index');
