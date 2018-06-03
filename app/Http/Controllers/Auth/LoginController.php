@@ -25,15 +25,41 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth:api')->except('logout');
+    // }
+
+    // public function authenticate(Request $request) {
+    //     $this->validateLogin($request);
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard('web')->attempt($credentials))
+    //         return response()->json(Auth::guard('web')->user());
+
+    //     return $this->sendFailedLoginResponse($request);
+    // }
+
+    // protected function validateLogin(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'email' => 'required|string',
+    //         'password' => 'required|string',
+    //     ]);
+    // }
+
+    // protected function sendFailedLoginResponse(Request $request)
+    // {
+    //     throw ValidationException::withMessages([
+    //         'email' => [trans('auth.failed')],
+    //     ]);
+    // }
+
 }

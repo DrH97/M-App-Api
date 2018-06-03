@@ -41,10 +41,20 @@ return [
             'provider' => 'users',
         ],
 
+        // 'drivers-web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'drivers'
+        // ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+
+        // 'drivers-api' => [
+        //     'driver' => 'passport',
+        //     'provider' => 'drivers'
+        // ],
     ],
 
     /*

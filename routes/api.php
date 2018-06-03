@@ -13,15 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/v1/user', function (Request $request) {
+Route::middleware('auth:api')->post('/v1/user', function (Request $request) {
     return $request->user();
 });
 
+Route::namespace('Auth')->middleware('auth:api')->prefix('/v1/user')-> group(function() {
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout');
+
+    Route::post('/register', 'RegisterController@register');
+});
 
 Route::namespace('Api\V1')->prefix('v1')->group(function() {
-    // Route::get('/users', function() {
-    //     return view('welcome');
-    // });
 
     Route::prefix('places')->group(function() {
         Route::get('/', 'PlaceController@index');

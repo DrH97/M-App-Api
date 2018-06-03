@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::namespace('Auth')->middleware('web')-> group(function() {
+    Route::get('/', function() {
+        return view('welcome');
+    }) ;
+
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout');
+
+    Route::post('/register', 'RegisterController@register');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
