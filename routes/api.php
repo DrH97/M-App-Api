@@ -17,7 +17,7 @@ Route::middleware('auth:api')->post('/v1/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('Auth')->middleware('auth:api')->prefix('/v1/user')-> group(function() {
+Route::namespace('Api\Auth')->middleware('auth:api')->prefix('/v1/user')-> group(function() {
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
 

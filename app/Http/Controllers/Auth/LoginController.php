@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -21,45 +24,21 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Where to redirect users after login / registration.
      *
      * @var string
      */
-    // protected $redirectTo = '/';
+    protected $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth:api')->except('logout');
-    // }
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'logout']);
+    }
 
-    // public function authenticate(Request $request) {
-    //     $this->validateLogin($request);
-    //     $credentials = $request->only('email', 'password');
-
-    //     if (Auth::guard('web')->attempt($credentials))
-    //         return response()->json(Auth::guard('web')->user());
-
-    //     return $this->sendFailedLoginResponse($request);
-    // }
-
-    // protected function validateLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'email' => 'required|string',
-    //         'password' => 'required|string',
-    //     ]);
-    // }
-
-    // protected function sendFailedLoginResponse(Request $request)
-    // {
-    //     throw ValidationException::withMessages([
-    //         'email' => [trans('auth.failed')],
-    //     ]);
-    // }
-
+    
 }
