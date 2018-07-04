@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Place;
 use App\PlaceActivity;
+use App\Activity;
+use App\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +19,22 @@ class PlaceController extends Controller
     public function index()
     {
         //
-        return Place::all();
+        $places = Place::all();
+
+        $places = $places ? $places : [];
+
+        foreach ($places as $place) {
+            $place['location'] = $this->findLocationArea($place);
+        }
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($places),
+            'results' => $places,
+        ];
+       
+        return response() ->json($response);
+  
     }
 
     // /**
@@ -41,7 +58,19 @@ class PlaceController extends Controller
         //
         $place = Place::find($place);
 
-        return $place == null ? [] : $place;
+        $place = $place == null ? [] : array($place);
+
+        foreach ($place as $p) {
+            $p['location'] = $this->findLocationArea($p);
+        }
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($place),
+            'results' => $place,
+        ];
+       
+        return response() ->json($response);
     }
 
     // /**
@@ -77,7 +106,19 @@ class PlaceController extends Controller
         //
         $place = Place::find($id);
 
-        return $place->placeActivities;
+        $placeactivities = $place == null ? [] : $place->placeActivities;
+
+        foreach ($placeactivities as $pA) {
+            $pA['activity'] = $pA->activity;
+        }
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($placeactivities),
+            'results' => $placeactivities,
+        ];
+
+        return response()->json($response);
     }
 
     /**
@@ -87,13 +128,25 @@ class PlaceController extends Controller
      */
     public function showPlaceActivity($place_id, $id)
     {
-        //
-        // $activity = PlaceActivity::where('place_id', $place_id)->get();
-        // $activity = $activity->find($id);
+ 
+        $place = Place::find($place_id);
 
-        $activity = Place::find($place_id)->placeActivities->where('activity_id', $id);
+        $activity = $place == null ? [] : $place->placeActivities->where('activity_id', $id);
 
-        return $activity == null ? [] : $activity;
+        foreach ($activity as $act) {
+            $act['activity'] = $act->activity->name;
+        }
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($activity),
+            'results' => $activity,
+        ];
+
+        return response()->json($response);
     }
 
+    public function findLocationArea($place) {
+        return Location::find($place->location_id)->area;
+    }
 }

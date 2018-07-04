@@ -13,4 +13,8 @@ class Activity extends Model
     public function placeActivities() {
         return $this->hasMany('App\PlaceActivity');
     }
+
+    public function parentActivities() {
+        return $this->belongsTo('App\Activity', 'parent_id');
+    }
 }

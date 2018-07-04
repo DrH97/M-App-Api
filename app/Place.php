@@ -20,7 +20,7 @@ class Place extends Model
     ];
 
     public function location() {
-        return $this->hasOne('App\Location');
+        return $this->hasOne('App\Location', "id");
     }
 
     public function placeActivities() {

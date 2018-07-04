@@ -69,6 +69,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('places', 'Admin\PlacesController');
     Route::post('places_restore/{id}', ['uses' => 'Admin\PlacesController@restore', 'as' => 'places.restore']);
     Route::delete('places_perma_del/{id}', ['uses' => 'Admin\PlacesController@perma_del', 'as' => 'places.perma_del']);
-    Route::resource('activities', 'Admin\ActivitiesController');
+    // Route::resource('activities', 'Admin\ActivitiesController');
 
 });
