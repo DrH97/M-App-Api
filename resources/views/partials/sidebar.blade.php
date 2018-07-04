@@ -12,8 +12,43 @@
                 </a>
             </li>
 
-            
-            @can('user_management_access')
+            {{-- @can('place_management_access') --}}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span class="title">@lang('quickadmin.place-management.title')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                
+                {{-- @can('role_access') --}}
+                <li class="active {{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.places.index') }}">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="title">
+                                @lang('quickadmin.places.title')
+                            </span>
+                        </a>
+                    </li>
+                {{-- @endcan --}}
+                {{-- @can('user_access') --}}
+                <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.activities.index') }}">
+                            <i class="fa fa-user"></i>
+                            <span class="title">
+                                @lang('quickadmin.activities.title')
+                            </span>
+                        </a>
+                    </li>
+                {{-- @endcan --}}
+                </ul>
+            </li>
+            {{-- @endcan --}}
+
+
+            {{-- @can('user_management_access') --}}
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
@@ -24,7 +59,7 @@
                 </a>
                 <ul class="treeview-menu">
                 
-                @can('role_access')
+                {{-- @can('role_access') --}}
                 <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.roles.index') }}">
                             <i class="fa fa-briefcase"></i>
@@ -33,8 +68,8 @@
                             </span>
                         </a>
                     </li>
-                @endcan
-                @can('user_access')
+                {{-- @endcan --}}
+                {{-- @can('user_access') --}}
                 <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.users.index') }}">
                             <i class="fa fa-user"></i>
@@ -43,18 +78,18 @@
                             </span>
                         </a>
                     </li>
-                @endcan
+                {{-- @endcan --}}
                 </ul>
             </li>
-            @endcan
-            @can('project_access')
-            <li class="{{ $request->segment(2) == 'projects' ? 'active' : '' }}">
+            {{-- @endcan --}}
+            {{-- @can('project_access') --}}
+            {{-- <li class="{{ $request->segment(2) == 'projects' ? 'active' : '' }}">
                 <a href="{{ route('admin.projects.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('quickadmin.projects.title')</span>
                 </a>
-            </li>
-            @endcan
+            </li> --}}
+            {{-- @endcan --}}
             
 
             
@@ -68,15 +103,16 @@
                 </a>
             </li> --}}
 
-            <li>
+            {{-- <li>
                 <a href="#logout" onclick="$('#logout').submit();">
                     <i class="fa fa-arrow-left"></i>
                     <span class="title">@lang('quickadmin.qa_logout')</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </section>
 </aside>
-{!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
+{!! Form::open(['route' => 'logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
 <button type="submit">@lang('quickadmin.logout')</button>
 {!! Form::close() !!}
+

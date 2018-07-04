@@ -20,7 +20,9 @@
         </a>
 
         
-
+        {!! Form::open(['route' => 'logout', 'style' => 'display:block; float:right;', 'id' => 'logout']) !!}
+        <button type="submit">Logout</button>
+        {!! Form::close() !!}
         
 
     </nav>

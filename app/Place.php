@@ -10,6 +10,15 @@ class Place extends Model
     //
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'image', 'description', 'location_id'
+    ];
+
     public function location() {
         return $this->hasOne('App\Location');
     }
