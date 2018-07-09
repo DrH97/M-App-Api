@@ -34,7 +34,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    // Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
     
         // Route::prefix('places')->group(function() {
         //     Route::get('/', 'PlacesController@index');
