@@ -17,7 +17,8 @@ Route::middleware('auth:api')->post('/v1/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('Api\Auth')->middleware('api')->prefix('/v1/user')-> group(function() {
+// >middleware('api')-
+Route::namespace('Api\Auth')->prefix('/v1/user')-> group(function() {
     // Route::post('/login', function(Request $request){
     //     return $request;
     // });
