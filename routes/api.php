@@ -13,15 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->post('/v1/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/v1/user/{id}', 'Api\V1\UserController@show');
 
 // >middleware('api')-
 Route::namespace('Api\Auth')->prefix('/v1/user')-> group(function() {
-    // Route::post('/login', function(Request $request){
-    //     return $request;
-    // });
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
 
@@ -29,6 +24,8 @@ Route::namespace('Api\Auth')->prefix('/v1/user')-> group(function() {
 });
 
 Route::namespace('Api\V1')->prefix('v1')->group(function() {
+
+    Route::get('/user/{id}', 'UserController@show');
 
     Route::prefix('places')->group(function() {
         Route::get('/', 'PlaceController@index');

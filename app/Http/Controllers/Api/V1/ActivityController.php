@@ -17,7 +17,16 @@ class ActivityController extends Controller
     public function index()
     {
         //
-        return Activity::all();
+        $activities = Activity::all();
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($activities),
+            'results' => $activities,
+        ];
+       
+        return response() ->json($response);
+  
     }
 
     // /**
@@ -39,7 +48,21 @@ class ActivityController extends Controller
     public function show($activity)
     {
         //
-        return Activity::find($activity);
+        $activity = Activity::find($activity);
+
+        $activity = $activity == null ? [] : array($activity);
+
+        foreach ($activity as $p) {
+            $p->parentActivities->name;
+        }
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($activity),
+            'results' => $activity,
+        ];
+       
+        return response() ->json($response);
     }
 
     // /**
@@ -74,8 +97,16 @@ class ActivityController extends Controller
     {
         //
         $activity = Activity::find($id);
+        
+        $activity = $activity == null ? [] : $activity->placeActivities;
 
-        return $activity->placeActivities;
+        $response = [
+            'status' => 'success',
+            'total_results' => count($activity),
+            'results' => $activity,
+        ];
+       
+        return response() ->json($response);
     }
 
     /**
@@ -85,13 +116,18 @@ class ActivityController extends Controller
      */
     public function showActivityPlace($activity_id, $id)
     {
-        //
-        // $activity = PlaceActivity::where('activity_id', $activity_id)->where('place_id', $id)->get();
-        // // $activity = $activity->where('place_id', $id)->get();
 
         $activity = Activity::find($activity_id)->placeActivities->where('place_id', $id);
 
-        return $activity == null ? [] : $activity;
+        $activity = $activity == null ? [] : $activity;
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($activity),
+            'results' => $activity,
+        ];
+       
+        return response() ->json($response);
     }
 
 }

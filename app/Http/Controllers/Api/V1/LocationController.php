@@ -17,7 +17,17 @@ class LocationController extends Controller
     public function index()
     {
         //
-        return Location::all();
+        $locations = Location::all();
+
+        $locations = $locations ? $locations : [];
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($locations),
+            'results' => $locations,
+        ];
+       
+        return response() ->json($response);
     }
 
     // /**
@@ -42,7 +52,15 @@ class LocationController extends Controller
 
         $location = Location::find($location);
 
-        return $location == null ? [] : $location;
+        $location = $location ? array($location) : [];
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($location),
+            'results' => $location,
+        ];
+       
+        return response() ->json($response);
     }
 
     // /**
@@ -78,7 +96,15 @@ class LocationController extends Controller
         //
         $location = Location::find($id);
 
-        return $location->places;
+        $location = $location ? $location->places : [];
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count($location),
+            'results' => $location,
+        ];
+       
+        return response() ->json($response);
     }
 
     /**
@@ -94,7 +120,13 @@ class LocationController extends Controller
 
         $place = Location::find($location_id)->places->where('id', $id);
 
-        return $place == null ? [] : $place;
+        $response = [
+            'status' => 'success',
+            'total_results' => count($place),
+            'results' => $place,
+        ];
+       
+        return response() ->json($response);
     }
 
 }
