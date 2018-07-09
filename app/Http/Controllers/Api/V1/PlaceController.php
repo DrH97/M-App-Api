@@ -147,6 +147,14 @@ class PlaceController extends Controller
     }
 
     public function findLocationArea($place) {
-        return Location::find($place->location_id)->area;
+        $place = Place::find($place);
+
+        $response = [
+            'status' => 'success',
+            'total_results' => count(array($place)),
+            'results' => Location::find($place->location_id)->area,
+        ];
+
+        return response()->json($response);
     }
 }

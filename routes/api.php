@@ -25,7 +25,7 @@ Route::namespace('Api\Auth')->prefix('/v1/user')-> group(function() {
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
 
-    Route::post('/register', 'RegisterController@register');
+    Route::post('/register', 'LoginController@register');
 });
 
 Route::namespace('Api\V1')->prefix('v1')->group(function() {
@@ -35,6 +35,7 @@ Route::namespace('Api\V1')->prefix('v1')->group(function() {
         Route::get('/{id}', 'PlaceController@show');
         Route::get('/{id}/activities', 'PlaceController@indexPlaceActivities');
         Route::get('/{place_id}/activities/{id}', 'PlaceController@showPlaceActivity');
+        Route::get('/{place_id}/area', 'PlaceController@findLocationArea');
     });
 
     Route::prefix('activities')->group(function() {
