@@ -24,7 +24,7 @@ class PlaceController extends Controller
         $places = $places ? $places : [];
 
         foreach ($places as $place) {
-            $place['location'] = $this->findLocationArea($place);
+            $place['location'] = Location::find($place->location_id)->area;
         }
 
         $response = [
