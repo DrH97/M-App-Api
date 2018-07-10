@@ -111,6 +111,7 @@ class PlaceController extends Controller
         foreach ($placeactivities as $pA) {
             $pA['activity_name'] = $pA->activity->name;
             $pA['activity_description'] = $pA->activity->description;
+            unset($pA['activity']);
         }
 
         $response = [
