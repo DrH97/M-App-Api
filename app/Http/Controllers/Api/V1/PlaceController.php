@@ -61,7 +61,7 @@ class PlaceController extends Controller
         $place = $place == null ? [] : array($place);
 
         foreach ($place as $p) {
-            $p['location'] = $this->findLocationArea($p);
+            $p['location'] = Location::find($p->location_id)->area;
         }
 
         $response = [
@@ -109,7 +109,8 @@ class PlaceController extends Controller
         $placeactivities = $place == null ? [] : $place->placeActivities;
 
         foreach ($placeactivities as $pA) {
-            $pA['activity'] = $pA->activity;
+            $pA['activity_name'] = $pA->activity->name;
+            $pA['activity_description'] = $pA->activity->description;
         }
 
         $response = [
