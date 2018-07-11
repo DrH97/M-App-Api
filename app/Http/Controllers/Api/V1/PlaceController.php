@@ -111,7 +111,7 @@ class PlaceController extends Controller
         foreach ($placeactivities as $pA) {
             $pA['activity_name'] = $pA->activity->name;
             $pA['activity_description'] = $pA->activity->description;
-            $pA['latitude'] = Location::find($pA->location_id)->latitude;
+            $pA['latitude'] = $pA->location->latitude;
             $pA['longitude'] = Location::find($pA->location_id)->longitude;
             unset($pA['activity']);
         }
