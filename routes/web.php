@@ -44,10 +44,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
         // });
     
         Route::prefix('activities')->group(function() {
-            Route::get('/', 'Admin\ActivityController@index');
-            Route::get('/{id}', 'Admin\ActivityController@show');
-            Route::get('/{id}/places', 'Admin\ActivityController@indexActivityPlaces');
-            Route::get('/{activity_id}/places/{id}', 'Admin\ActivityController@showActivityPlace');
+            Route::get('/', 'Admin\ActivitiesController@index');
+            Route::get('/{id}', 'Admin\ActivitiesController@show');
+            Route::get('/{id}/places', 'Admin\ActivitiesController@indexActivityPlaces');
+            Route::get('/{activity_id}/places/{id}', 'Admin\ActivitiesController@showActivityPlace');
         });
     
         // Route::prefix('locations')->group(function() {
