@@ -25,6 +25,8 @@ class PlaceController extends Controller
 
         foreach ($places as $place) {
             $place['location'] = Location::find($place->location_id)->area;
+            $place['latitude'] = Location::find($place->location_id)->latitude;
+            $place['longitude'] = Location::find($place->location_id)->longitude;
         }
 
         $response = [
@@ -111,8 +113,6 @@ class PlaceController extends Controller
         foreach ($placeactivities as $pA) {
             $pA['activity_name'] = $pA->activity->name;
             $pA['activity_description'] = $pA->activity->description;
-            $pA['latitude'] = $pA->location->latitude;
-            $pA['longitude'] = Location::find($pA->location_id)->longitude;
             unset($pA['activity']);
         }
 
