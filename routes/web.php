@@ -43,12 +43,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
         //     Route::get('/{place_id}/activities/{id}', 'PlacesController@showPlaceActivity');
         // });
     
-        // Route::prefix('activities')->group(function() {
-        //     Route::get('/', 'ActivityController@index');
-        //     Route::get('/{id}', 'ActivityController@show');
-        //     Route::get('/{id}/places', 'ActivityController@indexActivityPlaces');
-        //     Route::get('/{activity_id}/places/{id}', 'ActivityController@showActivityPlace');
-        // });
+        Route::prefix('activities')->group(function() {
+            Route::get('/', 'ActivityController@index');
+            Route::get('/{id}', 'ActivityController@show');
+            Route::get('/{id}/places', 'ActivityController@indexActivityPlaces');
+            Route::get('/{activity_id}/places/{id}', 'ActivityController@showActivityPlace');
+        });
     
         // Route::prefix('locations')->group(function() {
         //     Route::get('/', 'LocationController@index');
